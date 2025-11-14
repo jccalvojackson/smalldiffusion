@@ -54,7 +54,7 @@ dataset = DatasaurusDozen(csv_file=dataset_path, dataset="dino")
 # dataset = Swissroll(np.pi/2, 5*np.pi, 100)
 loader = DataLoader(dataset, batch_size=2130)
 fig = plot_batch(next(iter(loader)))
-wandb.log({"batch": fig})
+wandb.log({"batch": wandb.Image(fig)})
 
 
 # # Schedule
@@ -69,7 +69,7 @@ ax.plot(schedule.sigmas)
 ax.set_xlabel("$t$")
 ax.set_ylabel("$\sigma_t$")
 ax.set_yscale("log")
-wandb.log({"schedule": fig})
+wandb.log({"schedule": wandb.Image(fig)})
 
 
 # The $\sigma$ schedule is embedded sinusoidally as $[\sin(\log(\sigma)/2), \cos(\log(\sigma)/2)]$.
@@ -85,7 +85,7 @@ plt.plot(sx, label="$\sin(\log(\sigma_t)/2)$")
 ax.plot(sy, label="$\cos(\log(\sigma_t)/2)$")
 ax.set_xlabel("$t$")
 ax.legend()
-wandb.log({"sigma_embeds": fig})
+wandb.log({"sigma_embeds": wandb.Image(fig)})
 
 
 # # Model
@@ -124,7 +124,7 @@ ax.set_ylabel("Loss")
 ax.set_title("Training Loss")
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
-wandb.log({"training_loss": fig})
+wandb.log({"training_loss": wandb.Image(fig)})
 
 
 # # Sample
@@ -137,4 +137,4 @@ wandb.log({"training_loss": fig})
 # For DDIM sampling, change to gam=1, mu=0
 *xts, x0 = samples(model, schedule.sample_sigmas(20), batchsize=1500, gam=2, mu=0)
 fig = plot_batch(x0)
-wandb.log({"sample": fig})
+wandb.log({"sample": wandb.Image(fig)})
