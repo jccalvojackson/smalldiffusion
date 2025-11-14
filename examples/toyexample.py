@@ -44,8 +44,12 @@ def moving_average(x, w):
 # In[2]:
 
 
+from pathlib import Path
+
+dataset_path = Path(__file__).parent.parent / "datasets" / "DatasaurusDozen.tsv"
+
 # Try replacing dataset with 'dino', 'bullseye', 'h_lines', 'x_shape', etc.
-dataset = DatasaurusDozen(csv_file="../datasets/DatasaurusDozen.tsv", dataset="dino")
+dataset = DatasaurusDozen(csv_file=dataset_path, dataset="dino")
 # Or use the SwissRoll dataset
 # dataset = Swissroll(np.pi/2, 5*np.pi, 100)
 loader = DataLoader(dataset, batch_size=2130)
