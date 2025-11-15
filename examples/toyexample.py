@@ -137,4 +137,12 @@ wandb.log({"training_loss": wandb.Image(fig)})
 # For DDIM sampling, change to gam=1, mu=0
 *xts, x0 = samples(model, schedule.sample_sigmas(20), batchsize=1500, gam=2, mu=0)
 fig = plot_batch(x0)
-wandb.log({"sample": wandb.Image(fig)})
+wandb.log({"accelerated_sample": wandb.Image(fig)})
+
+*xts, x0 = samples(model, schedule.sample_sigmas(20), batchsize=1500, gam=1, mu=0.5)
+fig = plot_batch(x0)
+wandb.log({"ddpm_sample": wandb.Image(fig)})
+
+*xts, x0 = samples(model, schedule.sample_sigmas(20), batchsize=1500, gam=1, mu=0)
+fig = plot_batch(x0)
+wandb.log({"ddim_sample": wandb.Image(fig)})
